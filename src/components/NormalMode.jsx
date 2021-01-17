@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import '../styles.css';
-import { fetchUser, fetchPosts } from '../api/fakeApi';
+// import { fetchUser, fetchPosts } from '../api/fakeApi';
+import { fetchUser, fetchPosts } from '../api/tmpApi';
 
 function getNextId(id) {
   return id === 3 ? 0 : id + 1;
@@ -29,7 +30,7 @@ function ProfilePage({ id }) {
   }
   return (
     <>
-      <h1>{user.name}</h1>
+      <h1>{user.data.name}</h1>
       <ProfileTimeline id={id} />
     </>
   );

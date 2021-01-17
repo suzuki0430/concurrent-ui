@@ -1,8 +1,3 @@
-import Minami from '../picture/minami.png';
-import Suzu from '../picture/suzu.png';
-import Kanna from '../picture/kannna.png';
-import Yamada from '../picture/yamada.png';
-
 export const fetchProfileData = (userId) => {
   let userPromise = fetchUser(userId);
   let postsPromise = fetchPosts(userId);
@@ -52,7 +47,6 @@ export const fetchUser = (userId) => {
         case 0:
           resolve({
             data: {
-              logo: Minami,
               university: 'オックスフォード大学',
               department: '医学部',
               departure: '看護学科',
@@ -63,7 +57,6 @@ export const fetchUser = (userId) => {
         case 1:
           resolve({
             data: {
-              logo: Suzu,
               university: 'ハーバード大学',
               department: '工学部',
               departure: '物理学科',
@@ -74,7 +67,6 @@ export const fetchUser = (userId) => {
         case 2:
           resolve({
             data: {
-              logo: Kanna,
               university: 'ケンブリッジ大学',
               department: '経済学部',
               departure: '経済学科',
@@ -85,7 +77,6 @@ export const fetchUser = (userId) => {
         case 3:
           resolve({
             data: {
-              logo: Yamada,
               university: 'SASUKE大学',
               department: 'SASUKE部',
               departure: 'SASUKE学科',
