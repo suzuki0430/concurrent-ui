@@ -1,4 +1,5 @@
 import React, { useState, useTransition, Suspense } from 'react';
+import { Line, LineChart, XAxis, YAxis } from 'recharts';
 
 import '../styles.css';
 import { fetchProfileData } from '../api/fakeApi';
@@ -15,6 +16,16 @@ export const ConcurrentMode = () => {
     timeoutMs: 3000,
   });
 
+  const data = [
+    { date: '2/1', count: 4 },
+    { date: '2/2', count: 3 },
+    { date: '2/3', count: 20 },
+    { date: '2/4', count: 2 },
+    { date: '2/5', count: 18 },
+    { date: '2/6', count: 23 },
+    { date: '2/7', count: 10 },
+  ];
+
   return (
     <>
       <button
@@ -30,6 +41,7 @@ export const ConcurrentMode = () => {
       </button>
       {isPending ? ' Loading...' : null}
       <ProfilePage resource={resource} />
+      <ProfileChart data={data} />
     </>
   );
 };
@@ -58,5 +70,20 @@ const ProfileTimeline = ({ resource }) => {
         <li key={post.id}>{post.text}</li>
       ))}
     </ul>
+  );
+};
+
+const ProfileChart = ({ data }) => {
+  return (
+    <LineChart
+      width={400}
+      height={400}
+      data={data}
+      margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+    >
+      <Line type="monotone" dataKey="count" stroke="#387908" />
+      <XAxis dataKey="date" />
+      <YAxis />
+    </LineChart>
   );
 };

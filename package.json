@@ -8,7 +8,8 @@
     "react": "0.0.0-experimental-5faf377df",
     "react-dom": "0.0.0-experimental-5faf377df",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "recharts": "^2.0.3"
   },
   "devDependencies": {
     "typescript": "3.3.3"
