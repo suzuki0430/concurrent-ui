@@ -61,7 +61,7 @@ const ProfileChart = ({ id }) => {
 
   return (
     <>
-      <h3>街で声をかけられた回数</h3>
+      <h3>サインを求められた回数</h3>
       <div
         style={{
           border: 'solid 1px',

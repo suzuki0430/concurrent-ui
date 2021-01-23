@@ -1,6 +1,5 @@
 import React, { useState, useTransition, Suspense } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
-
 import '../styles.css';
 import { fetchProfileData } from '../api/tmpApi';
 
@@ -69,7 +68,7 @@ const ProfileChart = ({ resource }) => {
   const data = resource.posts.read();
   return (
     <>
-      <h3>街で声をかけられた回数</h3>
+      <h3>サインを求められた回数</h3>
       <div
         style={{
           border: 'solid 1px',
