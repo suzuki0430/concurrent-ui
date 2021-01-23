@@ -1,52 +1,31 @@
-import React, { useState, useTransition, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
 import '../styles.css';
-import { fetchProfileData } from '../api/tmpApi';
+import { fetchProfileData } from '../api/suspenseApi';
 
-const getNextId = (id) => {
-  return id === 3 ? 0 : id + 1;
-};
+const resource = fetchProfileData();
 
-const initialResource = fetchProfileData(0);
-
-export const ConcurrentMode = () => {
-  const [resource, setResource] = useState(initialResource);
-  const [startTransition, isPending] = useTransition({
-    timeoutMs: 3000,
-  });
-
+export const RenderAsYouFetch = () => {
   return (
     <div style={{ margin: '10px', padding: '10px' }}>
-      <h2>Concurrent Mode(並列モード)</h2>
-      <button
-        disabled={isPending}
-        onClick={() => {
-          startTransition(() => {
-            const nextUserId = getNextId(resource.userId);
-            setResource(fetchProfileData(nextUserId));
-          });
-        }}
-      >
-        次へ
-      </button>
-      {isPending ? ' Loading...' : null}
-      <ProfilePage resource={resource} />
+      <h2>Render-as-You-Fetch</h2>
+      <ProfilePage />
     </div>
   );
 };
 
-const ProfilePage = ({ resource }) => {
+const ProfilePage = () => {
   return (
     <Suspense fallback={<h1>Loading profile...</h1>}>
-      <ProfileDetails resource={resource} />
+      <ProfileDetails />
       <Suspense fallback={<h1>Loading posts...</h1>}>
-        <ProfileChart resource={resource} />
+        <ProfileChart />
       </Suspense>
     </Suspense>
   );
 };
 
-const ProfileDetails = ({ resource }) => {
+const ProfileDetails = () => {
   const user = resource.user.read();
   return (
     <div
@@ -64,7 +43,7 @@ const ProfileDetails = ({ resource }) => {
   );
 };
 
-const ProfileChart = ({ resource }) => {
+const ProfileChart = () => {
   const data = resource.posts.read();
   return (
     <>
