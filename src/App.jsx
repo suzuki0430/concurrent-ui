@@ -1,7 +1,7 @@
 import React, { useState, useTransition, Suspense } from 'react';
 
 import './styles.css';
-import { fetchProfileData } from './fakeApi';
+import { fetchProfileData } from './api/fakeApi';
 
 function getNextId(id) {
   return id === 3 ? 0 : id + 1;

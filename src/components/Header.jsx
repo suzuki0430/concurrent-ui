@@ -6,7 +6,7 @@ export const Header = () => {
     <header>
       <div className="nav">
         <NavLink to="/" activeClassName="is-active" exact={true}>
-          Normal mode
+          Contention State
         </NavLink>
         <NavLink to="/concurrent" activeClassName="is-active">
           Concurrent mode

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Header } from '../components/Header';
-import { NormalMode } from '../components/NormalMode';
+import { ContentionState } from '../components/ContentionState';
 import { ConcurrentMode } from '../components/ConcurrentMode';
 
 export const AppRouter = () => (
@@ -9,7 +9,7 @@ export const AppRouter = () => (
     <div className="container">
       <Header />
       <Switch>
-        <Route path="/" component={NormalMode} exact={true} />
+        <Route path="/" component={ContentionState} exact={true} />
         <Route path="/concurrent" component={ConcurrentMode} />
       </Switch>
     </div>
