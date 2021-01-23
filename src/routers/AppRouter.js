@@ -7,9 +7,11 @@ import { ContentionState } from '../components/ContentionState';
 import { ConcurrentMode } from '../components/ConcurrentMode';
 import { RenderAsYouFetch } from '../components/RenderAsYouFetch';
 
+import { Container } from '@material-ui/core';
+
 export const AppRouter = () => (
   <BrowserRouter>
-    <div className="container">
+    <Container maxWidth="sm">
       <Header />
       <Switch>
         <Route path="/" component={FetchOnRender} exact={true} />
@@ -26,6 +28,6 @@ export const AppRouter = () => (
         <Route path="/contention" component={ContentionState} exact={true} />
         <Route path="/concurrent" component={ConcurrentMode} exact={true} />
       </Switch>
-    </div>
+    </Container>
   </BrowserRouter>
 );
