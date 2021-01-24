@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
 import '../styles.css';
-import { fetchUser, fetchPosts } from '../api/tmpApi';
+import { fetchUserData, fetchChartData } from '../api/tmpApi';
 import { Button } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
@@ -28,13 +28,13 @@ export const ContentionState = () => {
 };
 
 const ProfilePage = ({ id }) => {
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    fetchUser(id).then((u) => setUser(u));
+    fetchUserData(id).then((u) => setUserData(u));
   }, [id]);
 
-  if (user === null) {
+  if (userData === null) {
     return (
       <Typography variant="p" component="h7" style={{ marginLeft: 10 }}>
         Loading profile...
@@ -50,10 +50,10 @@ const ProfilePage = ({ id }) => {
             color="textSecondary"
             gutterBottom
           >
-            {user.data.company}
+            {userData.data.company}
           </Typography>
           <Typography variant="h6" component="h2">
-            {user.data.name}
+            {userData.data.name}
           </Typography>
         </CardContent>
       </Card>
@@ -63,14 +63,14 @@ const ProfilePage = ({ id }) => {
 };
 
 const ProfileChart = ({ id }) => {
-  const [posts, setPosts] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    fetchPosts(id).then((p) => setPosts(p));
-    console.log(posts);
+    fetchChartData(id).then((p) => setChartData(p));
+    console.log(chartData);
   }, [id]);
 
-  if (posts === null) {
+  if (chartData === null) {
     return (
       <Typography variant="p" component="h7">
         Loading chart...
@@ -88,7 +88,7 @@ const ProfileChart = ({ id }) => {
           <LineChart
             width={400}
             height={400}
-            data={posts}
+            data={chartData}
             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
           >
             <Line dataKey="count" stroke="salmon" />

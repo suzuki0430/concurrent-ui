@@ -10,17 +10,17 @@ import { Typography } from '@material-ui/core';
 const promise = fetchProfileData();
 
 export const FetchThenRender = () => {
-  const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
     promise.then((data) => {
-      setUser(data.user);
-      setPosts(data.posts);
+      setUserData(data.userData);
+      setChartData(data.chartData);
     });
   }, []);
 
-  if (user === null) {
+  if (userData === null) {
     return (
       <Typography variant="p" component="h7">
         Loading profile...
@@ -36,20 +36,20 @@ export const FetchThenRender = () => {
             color="textSecondary"
             gutterBottom
           >
-            {user.data.company}
+            {userData.data.company}
           </Typography>
           <Typography variant="h6" component="h2">
-            {user.data.name}
+            {userData.data.name}
           </Typography>
         </CardContent>
       </Card>
-      <ProfileChart posts={posts} />
+      <ProfileChart chartData={chartData} />
     </div>
   );
 };
 
-const ProfileChart = ({ posts }) => {
-  if (posts === null) {
+const ProfileChart = ({ chartData }) => {
+  if (chartData === null) {
     return (
       <Typography variant="p" component="h7">
         Loading chart...
@@ -67,7 +67,7 @@ const ProfileChart = ({ posts }) => {
           <LineChart
             width={400}
             height={400}
-            data={posts}
+            data={chartData}
             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
           >
             <Line dataKey="count" stroke="salmon" />

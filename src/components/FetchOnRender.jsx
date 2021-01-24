@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
 import '../styles.css';
-import { fetchUser, fetchPosts } from '../api/noSuspenseApi';
+import { fetchUserData, fetchChartData } from '../api/noSuspenseApi';
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
 export const FetchOnRender = () => {
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    fetchUser().then((u) => setUser(u));
+    fetchUserData().then((u) => setUserData(u));
   }, []);
 
-  if (user === null) {
+  if (userData === null) {
     return (
       <Typography variant="p" component="h7">
         Loading profile...
@@ -29,10 +29,10 @@ export const FetchOnRender = () => {
             color="textSecondary"
             gutterBottom
           >
-            {user.data.company}
+            {userData.data.company}
           </Typography>
           <Typography variant="h6" component="h2">
-            {user.data.name}
+            {userData.data.name}
           </Typography>
         </CardContent>
       </Card>
@@ -42,13 +42,13 @@ export const FetchOnRender = () => {
 };
 
 const ProfileChart = () => {
-  const [posts, setPosts] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    fetchPosts().then((p) => setPosts(p));
+    fetchChartData().then((p) => setChartData(p));
   }, []);
 
-  if (posts === null) {
+  if (chartData === null) {
     return (
       <Typography variant="p" component="h7">
         Loading chart...
@@ -66,7 +66,7 @@ const ProfileChart = () => {
           <LineChart
             width={400}
             height={400}
-            data={posts}
+            data={chartData}
             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
           >
             <Line dataKey="count" stroke="salmon" />

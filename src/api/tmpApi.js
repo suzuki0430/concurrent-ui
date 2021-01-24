@@ -1,10 +1,10 @@
 export const fetchProfileData = (userId) => {
-  let userPromise = fetchUser(userId);
-  let postsPromise = fetchPosts(userId);
+  let userDataPromise = fetchUserData(userId);
+  let chartDataPromise = fetchChartData(userId);
   return {
     userId,
-    user: wrapPromise(userPromise),
-    posts: wrapPromise(postsPromise),
+    userData: wrapPromise(userDataPromise),
+    chartData: wrapPromise(chartDataPromise),
   };
 };
 
@@ -38,11 +38,11 @@ const wrapPromise = (promise) => {
   };
 };
 
-export const fetchUser = (userId) => {
-  console.log('fetch user ' + userId + '...');
+export const fetchUserData = (userId) => {
+  console.log('fetch userData ' + userId + '...');
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('fetched user ' + userId);
+      console.log('fetched userData ' + userId);
       switch (userId) {
         case 0:
           resolve({
@@ -77,17 +77,17 @@ export const fetchUser = (userId) => {
           });
           break;
         default:
-          throw Error('Unknown user.');
+          throw Error('Unknown userData.');
       }
     }, 2000 * Math.random());
   });
 };
 
-export const fetchPosts = (userId) => {
-  console.log('fetch posts for ' + userId + '...');
+export const fetchChartData = (userId) => {
+  console.log('fetch chartData for ' + userId + '...');
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('fetched posts for ' + userId);
+      console.log('fetched chartData for ' + userId);
       switch (userId) {
         case 0:
           resolve([
@@ -134,7 +134,7 @@ export const fetchPosts = (userId) => {
           ]);
           break;
         default:
-          throw Error('Unknown user.');
+          throw Error('Unknown userData.');
       }
     }, 2000 * Math.random());
   });

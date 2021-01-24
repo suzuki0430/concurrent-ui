@@ -1,14 +1,16 @@
 export function fetchProfileData() {
-  return Promise.all([fetchUser(), fetchPosts()]).then(([user, posts]) => {
-    return { user, posts };
-  });
+  return Promise.all([fetchUserData(), fetchChartData()]).then(
+    ([userData, chartData]) => {
+      return { userData, chartData };
+    }
+  );
 }
 
-export const fetchUser = () => {
-  console.log('fetch user...');
+export const fetchUserData = () => {
+  console.log('fetch userData...');
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('fetched user');
+      console.log('fetched userData');
       resolve({
         data: {
           company: '東宝芸能',
@@ -19,11 +21,11 @@ export const fetchUser = () => {
   });
 };
 
-export const fetchPosts = () => {
-  console.log('fetch posts...');
+export const fetchChartData = () => {
+  console.log('fetch chartData...');
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('fetched posts');
+      console.log('fetched chartData');
       resolve([
         { date: '2/1', count: 4 },
         { date: '2/2', count: 3 },

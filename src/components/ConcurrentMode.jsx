@@ -44,7 +44,7 @@ const ProfilePage = ({ resource }) => {
   return (
     <Suspense
       fallback={
-        <Typography variant="p" component="h7">
+        <Typography variant="p" component="h7" style={{ marginLeft: 10 }}>
           Loading profile...
         </Typography>
       }
@@ -64,15 +64,15 @@ const ProfilePage = ({ resource }) => {
 };
 
 const ProfileDetails = ({ resource }) => {
-  const user = resource.user.read();
+  const userData = resource.userData.read();
   return (
     <Card variant="outlined" style={{ marginTop: '10px' }}>
       <CardContent>
         <Typography style={{ fontSize: 16 }} color="textSecondary" gutterBottom>
-          {user.data.company}
+          {userData.data.company}
         </Typography>
         <Typography variant="h6" component="h2">
-          {user.data.name}
+          {userData.data.name}
         </Typography>
       </CardContent>
     </Card>
@@ -80,7 +80,7 @@ const ProfileDetails = ({ resource }) => {
 };
 
 const ProfileChart = ({ resource }) => {
-  const data = resource.posts.read();
+  const data = resource.chartData.read();
   return (
     <div style={{ marginTop: '10px' }}>
       <Typography variant="h6" component="h2">
