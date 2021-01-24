@@ -42,9 +42,21 @@ export const ConcurrentMode = () => {
 
 const ProfilePage = ({ resource }) => {
   return (
-    <Suspense fallback={<h1>Loading profile...</h1>}>
+    <Suspense
+      fallback={
+        <Typography variant="p" component="h7">
+          Loading profile...
+        </Typography>
+      }
+    >
       <ProfileDetails resource={resource} />
-      <Suspense fallback={<h1>Loading posts...</h1>}>
+      <Suspense
+        fallback={
+          <Typography variant="p" component="h7">
+            Loading chart...
+          </Typography>
+        }
+      >
         <ProfileChart resource={resource} />
       </Suspense>
     </Suspense>

@@ -35,7 +35,11 @@ const ProfilePage = ({ id }) => {
   }, [id]);
 
   if (user === null) {
-    return <p>Loading profile...</p>;
+    return (
+      <Typography variant="p" component="h7" style={{ marginLeft: 10 }}>
+        Loading profile...
+      </Typography>
+    );
   }
   return (
     <>
@@ -67,7 +71,11 @@ const ProfileChart = ({ id }) => {
   }, [id]);
 
   if (posts === null) {
-    return <h2>Loading posts...</h2>;
+    return (
+      <Typography variant="p" component="h7">
+        Loading chart...
+      </Typography>
+    );
   }
 
   return (

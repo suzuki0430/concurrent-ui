@@ -21,7 +21,11 @@ export const FetchThenRender = () => {
   }, []);
 
   if (user === null) {
-    return <p>Loading profile...</p>;
+    return (
+      <Typography variant="p" component="h7">
+        Loading profile...
+      </Typography>
+    );
   }
   return (
     <div>
@@ -46,7 +50,11 @@ export const FetchThenRender = () => {
 
 const ProfileChart = ({ posts }) => {
   if (posts === null) {
-    return <h2>Loading posts...</h2>;
+    return (
+      <Typography variant="p" component="h7">
+        Loading chart...
+      </Typography>
+    );
   }
 
   return (

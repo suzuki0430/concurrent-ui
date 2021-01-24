@@ -14,9 +14,21 @@ export const RenderAsYouFetch = () => {
 
 const ProfilePage = () => {
   return (
-    <Suspense fallback={<h1>Loading profile...</h1>}>
+    <Suspense
+      fallback={
+        <Typography variant="p" component="h7">
+          Loading profile...
+        </Typography>
+      }
+    >
       <ProfileDetails />
-      <Suspense fallback={<h1>Loading posts...</h1>}>
+      <Suspense
+        fallback={
+          <Typography variant="p" component="h7">
+            Loading chart...
+          </Typography>
+        }
+      >
         <ProfileChart />
       </Suspense>
     </Suspense>
