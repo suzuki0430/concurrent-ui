@@ -1,11 +1,9 @@
 import React, { useState, useTransition, Suspense } from 'react';
-import { Line, LineChart, XAxis, YAxis } from 'recharts';
-import '../styles.css';
-import { fetchProfileData } from '../api/tmpApi';
+import { fetchProfileData } from '../api/fakeApi';
 import { Button } from '@material-ui/core';
-import { Card } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+import { DetailsContent } from './content/DetailsContent';
+import { ChartContent } from './content/ChartContent';
 
 const getNextId = (id) => {
   return id === 3 ? 0 : id + 1;
@@ -42,9 +40,21 @@ export const ConcurrentMode = () => {
 
 const ProfilePage = ({ resource }) => {
   return (
-    <Suspense fallback={<h1>Loading profile...</h1>}>
+    <Suspense
+      fallback={
+        <Typography variant="p" component="h7" style={{ marginLeft: 10 }}>
+          Loading profile...
+        </Typography>
+      }
+    >
       <ProfileDetails resource={resource} />
-      <Suspense fallback={<h1>Loading posts...</h1>}>
+      <Suspense
+        fallback={
+          <Typography variant="p" component="h7">
+            Loading chart...
+          </Typography>
+        }
+      >
         <ProfileChart resource={resource} />
       </Suspense>
     </Suspense>
@@ -52,42 +62,17 @@ const ProfilePage = ({ resource }) => {
 };
 
 const ProfileDetails = ({ resource }) => {
-  const user = resource.user.read();
+  const userData = resource.userData.read();
   return (
-    <Card variant="outlined" style={{ marginTop: '10px' }}>
-      <CardContent>
-        <Typography style={{ fontSize: 16 }} color="textSecondary" gutterBottom>
-          {user.data.company}
-        </Typography>
-        <Typography variant="h6" component="h2">
-          {user.data.name}
-        </Typography>
-      </CardContent>
-    </Card>
+    <DetailsContent
+      company={userData.data.company}
+      name={userData.data.name}
+      image={userData.data.image}
+    />
   );
 };
 
 const ProfileChart = ({ resource }) => {
-  const data = resource.posts.read();
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <Typography variant="h6" component="h2">
-        サインを求められた回数
-      </Typography>
-      <Card variant="outlined">
-        <CardContent>
-          <LineChart
-            width={400}
-            height={400}
-            data={data}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-          >
-            <Line dataKey="count" stroke="salmon" />
-            <XAxis dataKey="date" />
-            <YAxis />
-          </LineChart>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  const data = resource.chartData.read();
+  return <ChartContent data={data} />;
 };
