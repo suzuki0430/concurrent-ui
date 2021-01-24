@@ -1,12 +1,12 @@
 import minami from '../picture/minami.jpg';
 
-export function fetchProfileData() {
+export const fetchProfileData = () => {
   return Promise.all([fetchUserData(), fetchChartData()]).then(
     ([userData, chartData]) => {
       return { userData, chartData };
     }
   );
-}
+};
 
 export const fetchUserData = () => {
   console.log('fetch userData...');

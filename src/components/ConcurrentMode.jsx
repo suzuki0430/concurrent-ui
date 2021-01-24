@@ -1,23 +1,9 @@
 import React, { useState, useTransition, Suspense } from 'react';
-import { Line, LineChart, XAxis, YAxis } from 'recharts';
-import '../styles.css';
 import { fetchProfileData } from '../api/fakeApi';
 import { Button } from '@material-ui/core';
-import { Card } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-
-import { makeStyles } from '@material-ui/core/styles';
-import { Avatar } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    marginBottom: '14px',
-  },
-}));
+import { DetailsContent } from './content/DetailsContent';
+import { ChartContent } from './content/ChartContent';
 
 const getNextId = (id) => {
   return id === 3 ? 0 : id + 1;
@@ -76,58 +62,17 @@ const ProfilePage = ({ resource }) => {
 };
 
 const ProfileDetails = ({ resource }) => {
-  const classes = useStyles();
   const userData = resource.userData.read();
   return (
-    <Card variant="outlined" style={{ marginTop: '10px' }}>
-      <Grid container spacing={5} alignItems="center">
-        <Grid item>
-          <CardContent>
-            <Typography
-              style={{ fontSize: 16 }}
-              color="textSecondary"
-              gutterBottom
-            >
-              {userData.data.company}
-            </Typography>
-            <Typography variant="h6" component="h2">
-              {userData.data.name}
-            </Typography>
-          </CardContent>
-        </Grid>
-        <Grid item>
-          <Avatar
-            alt="minami"
-            src={userData.data.image}
-            className={classes.large}
-          />
-        </Grid>
-      </Grid>
-    </Card>
+    <DetailsContent
+      company={userData.data.company}
+      name={userData.data.name}
+      image={userData.data.image}
+    />
   );
 };
 
 const ProfileChart = ({ resource }) => {
   const data = resource.chartData.read();
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <Typography variant="h6" component="h2">
-        サインを求められた回数
-      </Typography>
-      <Card variant="outlined">
-        <CardContent>
-          <LineChart
-            width={400}
-            height={400}
-            data={data}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-          >
-            <Line dataKey="count" stroke="salmon" />
-            <XAxis dataKey="date" />
-            <YAxis />
-          </LineChart>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return <ChartContent data={data} />;
 };
