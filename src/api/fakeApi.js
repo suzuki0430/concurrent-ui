@@ -1,3 +1,8 @@
+import minami from '../picture/minami.jpg';
+import suzu from '../picture/suzu.jpg';
+import kanna from '../picture/kanna.jpg';
+import yamada from '../picture/yamada.jpg';
+
 export const fetchProfileData = (userId) => {
   let userDataPromise = fetchUserData(userId);
   let chartDataPromise = fetchChartData(userId);
@@ -49,6 +54,7 @@ export const fetchUserData = (userId) => {
             data: {
               company: '東宝芸能',
               name: '浜辺　美波',
+              image: minami,
             },
           });
           break;
@@ -57,6 +63,7 @@ export const fetchUserData = (userId) => {
             data: {
               company: 'フォスタープラス',
               name: '広瀬　すず',
+              image: suzu,
             },
           });
           break;
@@ -65,6 +72,7 @@ export const fetchUserData = (userId) => {
             data: {
               company: 'ディスカバリー・ネクスト',
               name: '橋本　環奈',
+              image: kanna,
             },
           });
           break;
@@ -73,6 +81,7 @@ export const fetchUserData = (userId) => {
             data: {
               company: 'SASUKE軍団',
               name: '山田　勝己',
+              image: yamada,
             },
           });
           break;

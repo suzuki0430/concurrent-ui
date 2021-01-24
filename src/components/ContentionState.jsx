@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
 import '../styles.css';
-import { fetchUserData, fetchChartData } from '../api/tmpApi';
+import { fetchUserData, fetchChartData } from '../api/fakeApi';
 import { Button } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginBottom: '14px',
+  },
+}));
 
 const getNextId = (id) => {
   return id === 3 ? 0 : id + 1;
@@ -28,6 +40,7 @@ export const ContentionState = () => {
 };
 
 const ProfilePage = ({ id }) => {
+  const classes = useStyles();
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -44,18 +57,29 @@ const ProfilePage = ({ id }) => {
   return (
     <>
       <Card variant="outlined" style={{ marginTop: '10px' }}>
-        <CardContent>
-          <Typography
-            style={{ fontSize: 16 }}
-            color="textSecondary"
-            gutterBottom
-          >
-            {userData.data.company}
-          </Typography>
-          <Typography variant="h6" component="h2">
-            {userData.data.name}
-          </Typography>
-        </CardContent>
+        <Grid container spacing={5} alignItems="center">
+          <Grid item>
+            <CardContent>
+              <Typography
+                style={{ fontSize: 16 }}
+                color="textSecondary"
+                gutterBottom
+              >
+                {userData.data.company}
+              </Typography>
+              <Typography variant="h6" component="h2">
+                {userData.data.name}
+              </Typography>
+            </CardContent>
+          </Grid>
+          <Grid item>
+            <Avatar
+              alt="minami"
+              src={userData.data.image}
+              className={classes.large}
+            />
+          </Grid>
+        </Grid>
       </Card>
       <ProfileChart id={id} />
     </>

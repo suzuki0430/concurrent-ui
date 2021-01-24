@@ -1,3 +1,5 @@
+import minami from '../picture/minami.jpg';
+
 export const fetchProfileData = (userId) => {
   let userDataPromise = fetchUserData(userId);
   let chartDataPromise = fetchChartData(userId);
@@ -47,6 +49,7 @@ export const fetchUserData = () => {
         data: {
           company: '東宝芸能',
           name: '浜辺　美波',
+          image: minami,
         },
       });
     }, 2000);
